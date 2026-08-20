@@ -1,0 +1,15 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import type { Translation } from '../../i18n/types';
+import type { Locale, PageKey } from '../../i18n/routes';
+interface Props { copy: Translation; locale: Locale; page: PageKey; }
+const { copy, page } = Astro.props;
+const privacy = page === 'privacy';
+const title = privacy ? copy.legal.privacyTitle : copy.legal.cookiesTitle;
+const intro = privacy ? copy.legal.privacyIntro : copy.legal.cookiesIntro;
+const eyebrow = privacy ? copy.legal.privacyEyebrow : copy.legal.cookiesEyebrow;
+const heading = privacy ? copy.legal.privacyHeading : copy.legal.cookiesHeading;
+const paragraphs = privacy ? copy.legal.privacyParagraphs : copy.legal.cookiesParagraphs;
+---
+<section class="page-hero page-hero--paper"><div class="container"><span class="eyebrow">{title}</span><h1 class="display">{title}</h1><p class="section-intro">{intro}</p></div></section>
+<section class="section"><div class="container editorial-copy"><SectionHeading eyebrow={eyebrow} title={heading} /><div>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div></div></section>

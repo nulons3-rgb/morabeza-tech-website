@@ -1,0 +1,70 @@
+---
+import type { Translation } from '../i18n/types';
+interface Props { copy: Translation; }
+const { copy } = Astro.props;
+const endpoint = import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT || '';
+const formCopy = copy.contactPage.form;
+---
+<form class="contact-form" id="contact-form" data-endpoint={endpoint} data-copy={JSON.stringify(formCopy)} novalidate>
+  <div class="form-grid">
+    <div class="field"><label for="name">{formCopy.name} *</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
+    <div class="field"><label for="company">{formCopy.company}</label><input id="company" name="company" type="text" autocomplete="organization" /></div>
+    <div class="field"><label for="email">{formCopy.email} *</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+    <div class="field"><label for="phone">{formCopy.phone}</label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+    <div class="field"><label for="subject">{formCopy.subject} *</label><select id="subject" name="subject" required><option value="">{formCopy.subjectPlaceholder}</option>{formCopy.subjects.map((item) => <option>{item}</option>)}</select></div>
+    <div class="field"><label for="budget">{formCopy.budget}</label><select id="budget" name="budget"><option value="">{formCopy.budgetPlaceholder}</option>{formCopy.budgets.map((item) => <option>{item}</option>)}</select></div>
+    <div class="field field--full"><label for="message">{formCopy.message} *</label><textarea id="message" name="message" required placeholder={formCopy.messagePlaceholder}></textarea></div>
+  </div>
+  <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+  <label class="consent"><input type="checkbox" name="consent" required /> <span>{formCopy.consent} *</span></label>
+  <div class="form-actions"><button class="btn btn--primary" type="submit">{formCopy.submit} <span aria-hidden="true">↗</span></button><p class="form-status" role="status" aria-live="polite"></p></div>
+</form>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  if (form) {
+    const formCopy = JSON.parse(form.dataset.copy || '{}');
+    const status = form.querySelector<HTMLElement>('.form-status');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const honeypot = form.querySelector<HTMLInputElement>('[name="website"]');
+    const subject = form.querySelector<HTMLSelectElement>('#subject');
+    const email = form.querySelector<HTMLInputElement>('#email');
+    if (!status || !submit || !honeypot || !subject || !email) throw new Error('Contact form is missing required elements');
+    const endpoint = form.dataset.endpoint;
+    const encode = (value: FormDataEntryValue | undefined) => encodeURIComponent(String(value || ''));
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (email.value && !email.validity.valid) { status.textContent = formCopy.invalidEmail; status.className = 'form-status error'; email.focus(); return; }
+      if (!form.checkValidity()) { status.textContent = formCopy.required; status.className = 'form-status error'; form.reportValidity(); return; }
+      if (honeypot.value) return;
+      const data = new FormData(form);
+      const values = Object.fromEntries(data.entries());
+      submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      status.textContent = formCopy.loading;
+      status.className = 'form-status';
+      if (!endpoint) {
+        const body = `${formCopy.name}: ${values.name}\n${formCopy.company}: ${values.company || '-'}\n${formCopy.email}: ${values.email}\n${formCopy.phone}: ${values.phone || '-'}\n${formCopy.subject}: ${values.subject}\n${formCopy.budget}: ${values.budget || '-'}\n\n${formCopy.message}:\n${values.message}`;
+        window.location.href = `mailto:info@morabezatech.com?subject=${encode('Morabeza Tech — ' + values.subject)}&body=${encode(body)}`;
+        status.textContent = formCopy.fallback;
+        submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+        return;
+      }
+      try {
+        const response = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Request failed');
+        form.reset();
+        status.textContent = formCopy.success;
+        status.className = 'form-status success';
+      } catch {
+        status.textContent = formCopy.failure;
+        status.className = 'form-status error';
+      } finally {
+        submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+      }
+    });
+    const querySubject = new URLSearchParams(window.location.search).get('onderwerp');
+    if (querySubject) subject.value = querySubject;
+  }
+</script>

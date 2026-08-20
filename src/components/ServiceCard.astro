@@ -1,0 +1,11 @@
+---
+import type { ServiceCopy } from '../i18n/types';
+interface Props { service: ServiceCopy; }
+const { service } = Astro.props;
+---
+<article class:list={['service-card', `service-card--${service.tone}`]} data-reveal>
+  <span class="service-number">{service.number} / 08</span>
+  <h3>{service.title}</h3>
+  <p>{service.short}</p>
+  <div class="service-list">{service.items.map((item) => <span>{item}</span>)}</div>
+</article>

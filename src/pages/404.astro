@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getTranslation } from '../i18n/utils';
+import { localizedPath } from '../i18n/routes';
+const copy = getTranslation('pt');
+---
+<BaseLayout locale="pt" page="home" title="404 — Morabeza Tech CV" description="Esta página não existe ou foi movida.">
+  <section class="section not-found"><div class="container"><span class="eyebrow">404 / Página não encontrada</span><h1 class="display">Esta página ficou <em>temporariamente offline.</em></h1><p class="section-intro" style="margin-inline:auto">A ligação que seguiu não existe ou foi movida. Ajudamos a encontrar o caminho certo.</p><div class="hero-actions" style="justify-content:center"><a class="btn btn--primary" href={localizedPath('pt', 'home')}>{copy.common.backHome} <span aria-hidden="true">↗</span></a><a class="btn btn--ghost" href={localizedPath('pt', 'contact')}>{copy.common.contactUs}</a></div><div class="not-found-languages"><a href={localizedPath('en', 'home')}>EN</a><a href={localizedPath('nl', 'home')}>NL</a></div></div></section>
+</BaseLayout>

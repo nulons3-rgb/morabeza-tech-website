@@ -1,0 +1,16 @@
+---
+interface Props { label: string; analysisLabel: string; value: string; }
+const { label, analysisLabel, value } = Astro.props;
+---
+<div class="mockup-stage" aria-label={label} data-reveal>
+  <div class="mockup-orbit" aria-hidden="true"></div>
+  <div class="browser">
+    <div class="browser-bar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i><span class="browser-url"></span></div>
+    <div class="ui-screen">
+      <div class="ui-top"><span class="ui-brand"></span><span class="ui-nav"><i></i><i></i><i></i></span></div>
+      <div class="ui-hero"><div><span class="ui-kicker"></span><div class="ui-title"></div><div class="ui-copy"></div><div class="ui-button"></div></div><div class="ui-art"></div></div>
+      <div class="ui-stat"><div><b></b><span></span></div><div><b></b><span></span></div><div><b></b><span></span></div></div>
+    </div>
+  </div>
+  <div class="floating-card"><small>{analysisLabel}</small><strong>{value}</strong><div class="floating-line"></div></div>
+</div>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesPage from '../../components/pages/ServicesPage.astro';
+import PackagesPage from '../../components/pages/PackagesPage.astro';
+import AboutPage from '../../components/pages/AboutPage.astro';
+import PortfolioPage from '../../components/pages/PortfolioPage.astro';
+import ContactPage from '../../components/pages/ContactPage.astro';
+import LegalPage from '../../components/pages/LegalPage.astro';
+import { getSeo, getTranslation } from '../../i18n/utils';
+import { locales, pageKeys, routeMap, type Locale, type PageKey } from '../../i18n/routes';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) => pageKeys.filter((page) => page !== 'home').map((page) => ({ params: { lang: locale, page: routeMap[locale][page] }, props: { locale, page, copy: getTranslation(locale) } })));
+}
+
+const { locale, page, copy } = Astro.props as { locale: Locale; page: PageKey; copy: ReturnType<typeof getTranslation> };
+const seo = getSeo(copy, page);
+---
+<BaseLayout locale={locale} page={page} title={seo.title} description={seo.description}>
+  {page === 'services' && <ServicesPage copy={copy} locale={locale} />}
+  {page === 'packages' && <PackagesPage copy={copy} locale={locale} />}
+  {page === 'about' && <AboutPage copy={copy} locale={locale} />}
+  {page === 'portfolio' && <PortfolioPage copy={copy} locale={locale} />}
+  {page === 'contact' && <ContactPage copy={copy} locale={locale} />}
+  {(page === 'privacy' || page === 'cookies') && <LegalPage copy={copy} locale={locale} page={page} />}
+</BaseLayout>

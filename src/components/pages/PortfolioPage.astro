@@ -1,0 +1,21 @@
+---
+import ProjectCard from '../ProjectCard.astro';
+import CTASection from '../CTASection.astro';
+import type { Translation } from '../../i18n/types';
+import type { Locale } from '../../i18n/routes';
+interface Props { copy: Translation; locale: Locale; }
+const { copy, locale } = Astro.props;
+---
+<section class="page-hero page-hero--paper"><div class="container"><span class="eyebrow">{copy.portfolioPage.eyebrow}</span><h1 class="display">{copy.portfolioPage.title}</h1><p class="section-intro">{copy.portfolioPage.intro}</p></div></section>
+<section class="section"><div class="container"><div class="portfolio-filter" role="group" aria-label={copy.portfolioPage.eyebrow}>{copy.portfolioPage.filters.map((filter, index) => <button class="filter-btn" class:list={[index === 0 && 'is-active']} type="button" data-filter={index === 0 ? 'all' : filter.toLowerCase()}>{filter}</button>)}</div><div class="portfolio-grid">{copy.portfolioPage.projects.map((project) => <ProjectCard project={project} small={project.slug !== 'hotel'} />)}</div><p class="concept-note">{copy.portfolioPage.conceptNote}</p></div></section>
+<CTASection copy={copy} locale={locale} />
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('.portfolio-grid [data-category]');
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    buttons.forEach((item) => item.classList.remove('is-active'));
+    button.classList.add('is-active');
+    const filter = button.dataset.filter;
+    cards.forEach((card) => { card.hidden = filter !== 'all' && !card.dataset.category?.includes(filter || ''); });
+  }));
+</script>

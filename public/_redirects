@@ -1,0 +1,6 @@
+/pt        /pt/        301
+/pt/*      /pt/:splat/ 301
+/en        /en/        301
+/en/*      /en/:splat/ 301
+/nl        /nl/        301
+/nl/*      /nl/:splat/ 301

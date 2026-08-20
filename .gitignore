@@ -1,0 +1,9 @@
+node_modules/
+.astro/
+dist/
+.env*
+!.env.example
+.DS_Store
+*.log
+.npmrc
+.git-local/

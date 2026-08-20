@@ -1,0 +1,11 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import CTASection from '../CTASection.astro';
+import type { Translation } from '../../i18n/types';
+import type { Locale } from '../../i18n/routes';
+interface Props { copy: Translation; locale: Locale; }
+const { copy, locale } = Astro.props;
+---
+<section class="page-hero"><div class="container"><span class="eyebrow eyebrow--light">{copy.servicesPage.eyebrow}</span><h1 class="display">{copy.servicesPage.title}</h1><p class="section-intro dark-copy">{copy.servicesPage.intro}</p></div></section>
+<section class="section"><div class="container"><div class="section-head"><SectionHeading eyebrow={copy.servicesPage.sectionEyebrow} title={copy.servicesPage.sectionTitle} intro={copy.servicesPage.sectionIntro} /></div><div class="service-detail-grid">{copy.servicesPage.services.map((service) => <article class="service-detail" id={service.number === '01' ? 'websites' : service.number === '02' ? 'google' : service.number === '03' ? 'whatsapp' : service.number === '04' ? 'social' : service.number === '05' ? 'reserveringen' : service.number === '07' ? 'seo' : service.number === '08' ? 'onderhoud' : undefined} data-reveal><span class="service-detail-number">{service.number} / 08</span><div><h2>{service.title}</h2><ul>{service.items.map((item) => <li>{item}</li>)}</ul></div><p>{service.detail}</p></article>)}</div></div></section>
+<CTASection copy={copy} locale={locale} />

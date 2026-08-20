@@ -1,0 +1,13 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import CTASection from '../CTASection.astro';
+import type { Translation } from '../../i18n/types';
+import type { Locale } from '../../i18n/routes';
+import { localizedPath } from '../../i18n/routes';
+interface Props { copy: Translation; locale: Locale; }
+const { copy, locale } = Astro.props;
+---
+<section class="page-hero"><div class="container"><span class="eyebrow eyebrow--light">{copy.aboutPage.eyebrow}</span><h1 class="display">{copy.aboutPage.title}</h1><p class="section-intro dark-copy">{copy.aboutPage.intro}</p></div></section>
+<section class="section"><div class="container editorial"><div class="editorial-copy"><SectionHeading eyebrow={copy.aboutPage.missionEyebrow} title={copy.aboutPage.missionTitle} />{copy.aboutPage.missionParagraphs.map((paragraph) => <p>{paragraph}</p>)}</div><div class="editorial-list">{copy.aboutPage.rows.map((row) => <div class="editorial-row" data-reveal><strong>{row.label}</strong><div><h3>{row.title}</h3><p>{row.copy}</p></div></div>)}</div></div></section>
+<section class="section section--paper"><div class="container about-split"><div class="about-mark" data-reveal><strong>{copy.aboutPage.mark}</strong><span>{copy.aboutPage.location}</span></div><div data-reveal><SectionHeading eyebrow={copy.aboutPage.positionEyebrow} title={copy.aboutPage.positionTitle} intro={copy.aboutPage.positionIntro} /><a class="btn btn--primary" style="margin-top: 28px" href={localizedPath(locale, 'contact')}>{copy.aboutPage.positionCta} <span aria-hidden="true">↗</span></a></div></div></section>
+<CTASection copy={copy} locale={locale} />

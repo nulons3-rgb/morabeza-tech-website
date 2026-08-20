@@ -1,0 +1,15 @@
+---
+interface Props { questions: Array<{ question: string; answer: string }>; }
+const { questions } = Astro.props;
+---
+<div class="faq-list">
+  {questions.map(({ question, answer }, index) => <div class="faq-item" data-faq-item><button class="faq-question" type="button" aria-expanded="false" aria-controls={`faq-${index}`}><span>{question}</span><span aria-hidden="true">+</span></button><div class="faq-answer" id={`faq-${index}`}><p>{answer}</p></div></div>)}
+</div>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-faq-item] .faq-question').forEach((button) => button.addEventListener('click', () => {
+    const item = button.closest<HTMLElement>('[data-faq-item]');
+    if (!item) return;
+    const open = item.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', String(open));
+  }));
+</script>

@@ -255,3 +255,18 @@ body.menu-open .menu-toggle span:nth-child(2) { transform: translateY(-5px) rota
   .footer-brand .brand-lockup { width: 96px; height: 96px; flex-basis: 96px; }
   .footer-brand .brand-lockup img { width: 96px; height: 96px; }
 }
+
+/* Photo-only refinement: business-led crops with restrained brand grading. */
+.hero-photo-frame img { object-position: 62% 48%; filter: saturate(.94) contrast(1.04); }
+.about-photo img { object-position: center 44%; filter: saturate(.93) contrast(1.04); }
+.photo-break picture, .editorial-photo-layout picture, .about-photo { position: relative; }
+.photo-break picture::after, .editorial-photo-layout picture::after, .about-photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(7,17,31,.12), transparent 54%, rgba(7,17,31,.16)); }
+.photo-break img, .editorial-photo-layout img { filter: saturate(.93) contrast(1.04); }
+.photo-break img { object-position: 58% 46%; }
+.editorial-photo-layout img { object-position: center 47%; }
+
+@media (max-width: 767px) {
+  .hero-photo-frame img { object-position: 58% 45%; }
+  .photo-break img { object-position: 54% 44%; }
+  .editorial-photo-layout img { object-position: center 43%; }
+}

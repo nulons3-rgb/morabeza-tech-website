@@ -9,15 +9,13 @@ const visual = getVisualCopy(locale);
 <div class="hero-visual" aria-label={label} data-reveal data-tilt>
   <div class="hero-photo-frame">
     <picture>
-      <source media="(max-width: 700px)" srcset="/assets/mindelo-harbor.avif" type="image/avif" />
-      <source media="(max-width: 700px)" srcset="/assets/mindelo-harbor-800.webp" type="image/webp" />
-      <source srcset="/assets/mindelo-harbor.avif" type="image/avif" />
-      <source srcset="/assets/mindelo-harbor-800.webp 800w, /assets/mindelo-harbor-1400.webp 1400w, /assets/mindelo-harbor.webp 2400w" sizes="(max-width: 1100px) 60vw, 44vw" type="image/webp" />
-      <img src="/assets/mindelo-harbor.jpg" srcset="/assets/mindelo-harbor-800.webp 800w, /assets/mindelo-harbor-1400.webp 1400w, /assets/mindelo-harbor.webp 2400w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 60vw, 44vw" alt={imageAlt} width="2400" height="1384" fetchpriority="high" decoding="async" />
+      <source media="(max-width: 700px)" srcset="/assets/business-hero-800.avif" type="image/avif" />
+      <source media="(max-width: 700px)" srcset="/assets/business-hero-800.webp" type="image/webp" />
+      <source srcset="/assets/business-hero.avif" type="image/avif" />
+      <source srcset="/assets/business-hero-800.webp 800w, /assets/business-hero-1400.webp 1400w, /assets/business-hero.webp 2400w" sizes="(max-width: 1100px) 60vw, 44vw" type="image/webp" />
+      <img src="/assets/business-hero.jpg" srcset="/assets/business-hero-800.webp 800w, /assets/business-hero-1400.webp 1400w, /assets/business-hero.webp 2400w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 60vw, 44vw" alt={imageAlt} width="2400" height="1600" fetchpriority="high" decoding="async" />
     </picture>
     <div class="hero-photo-shade"></div>
-    <span class="hero-photo-tag">{visual.heroTag}</span>
-    <span class="hero-photo-caption">{visual.heroCaption}</span>
   </div>
   <div class="hero-grid-lines" aria-hidden="true"></div>
   <div class="browser browser--hero">
@@ -26,7 +24,6 @@ const visual = getVisualCopy(locale);
   </div>
   <div class="device-card" aria-hidden="true"><span>MT</span><b></b><i></i><em></em></div>
   <div class="hero-status"><span></span><div><small>{analysisLabel}</small><strong>{value}</strong></div></div>
-  <div class="hero-location"><span></span>{visual.heroLocation}</div>
 </div>
 
 <script>

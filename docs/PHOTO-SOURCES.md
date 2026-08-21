@@ -1,11 +1,12 @@
 # Photo sources
 
-The visual refresh uses locally stored, optimized assets from Pexels. Pexels' free-to-use license applies to the downloaded source images; the source links and location metadata are retained here for provenance.
+The active photographic presentation uses locally stored, optimized assets. Pexels' free-to-use license applies to the downloaded source images. The photographic direction is intentionally business-focused; the website does not use location labels or location claims around these images.
 
-- `public/assets/praia-city.webp` and responsive variants: [Aerial Shot of Cityscape](https://www.pexels.com/photo/aerial-shot-of-cityscape-15532622/), Sandro Lopes Art. The Pexels listing identifies the location as Praia, Praia, Cabo Verde. Downloaded from Pexels on 2026-08-21.
-- `public/assets/sal-street.webp` and responsive variant: [Colorful Building at Tropical Beach Resort](https://www.pexels.com/photo/colorful-building-at-tropical-beach-resort-5829049/), Petr Ganaj. The Pexels listing identifies the location as Sal, Cape Verde. Downloaded from Pexels on 2026-08-21.
-- `public/assets/mindelo-harbor.webp`, AVIF and responsive variants: [Ships in the Harbor](https://www.pexels.com/photo/ships-in-the-harbor-13636689/), Ana Marta Jorge. The Pexels listing identifies the location as Mindelo, São Vicente, Cabo Verde. Downloaded from Pexels on 2026-08-21 and used for the homepage hero.
+- `public/assets/business-hero.*`: [Businessman Working on a Laptop in a Cafe](https://www.pexels.com/photo/businessman-working-on-a-laptop-in-a-cafe-7446935/), Gustavo Fring. Used for the homepage hero to represent entrepreneurship and digital work.
+- `public/assets/digital-business-services.*`: [Receptionist Holding a Tablet](https://www.pexels.com/photo/receptionist-holding-a-tablet-4269271/), Cedric Fauntleroy. Used on the Services page to connect professional operations with technology.
+- `public/assets/business-operations.*`: [People Working on Laptop in Restaurant](https://www.pexels.com/photo/people-working-on-laptop-in-restaurant-4339799/), Edmond Dantès. Used as a second homepage business moment to represent collaboration and operations.
+- `public/assets/professional-hospitality.*`: existing project-provided `local-business.png`, retained on the About page because it shows a hospitality professional at work. The repository does not provide source/license metadata for this asset, so no location or provenance claim is made in the UI.
 
-The existing brand logo is preserved unchanged. Existing project photography remains in the repository but is not used as a verified location claim.
+The previously used city, coastal architecture and harbour images remain in the repository for recoverability but are no longer referenced by active page components. The existing brand logo is preserved unchanged.
 
 Platform marks in `public/assets/platforms/` are locally stored SVGs from the Simple Icons CDN (with LinkedIn from Devicon where the Simple Icons endpoint did not provide the mark). They are presented as technologies and platforms Morabeza Tech can work with, not as partners, clients or sponsors.

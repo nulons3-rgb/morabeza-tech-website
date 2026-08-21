@@ -8,14 +8,8 @@ export interface VisualCopy {
   systemItems: Array<{ label: string; detail: string }>;
   servicesPhotoAlt: string;
   heroPhotoAlt: string;
+  homePhotoAlt: string;
   aboutPhotoAlt: string;
-  contactPhotoAlt: string;
-  photoServicesLabel: string;
-  photoAboutLabel: string;
-  photoContactLabel: string;
-  heroTag: string;
-  heroCaption: string;
-  heroLocation: string;
   mockupKicker: string;
   mockupTitle: string;
   mockupStats: string[];
@@ -39,14 +33,11 @@ const visualCopy: Record<Locale, VisualCopy> = {
       { label: 'Reviews', detail: 'Vertrouwen versterken' },
       { label: 'SEO', detail: 'Structureel zichtbaar' }
     ],
-    servicesPhotoAlt: 'Kleurrijke straat in Sal, Cabo Verde, met lokale architectuur en een muurschildering',
-    heroPhotoAlt: 'Haven van Mindelo op São Vicente, Cabo Verde, met schepen, kade en Atlantisch ochtendlicht',
-    aboutPhotoAlt: 'Luchtbeeld van Praia, Cabo Verde, met stedelijke daken en de Atlantische kust',
-    contactPhotoAlt: 'Lokale straat en architectuur in Sal, Cabo Verde',
-    photoServicesLabel: 'Sal / lokale context',
-    photoAboutLabel: 'Praia / Cabo Verde',
-    photoContactLabel: 'Cabo Verde / dichtbij'
-    , heroTag: 'Mindelo / Cabo Verde', heroCaption: 'Haven / Atlantisch licht', heroLocation: 'São Vicente, Cabo Verde', mockupKicker: 'Digitale aanwezigheid', mockupTitle: 'Helderheid die bedrijven vooruithelpt.', mockupStats: ['SNEL / 98', 'LOKAAL / CV', 'KLAAR / 24'], browserPath: 'morabezatech.com / digitaal', systemBrowserKicker: 'LOKAAL / DIGITAAL', systemBrowserTitle: 'Vind. Vertrouw. Verbind.', systemBrowserFooter: ['Helderheid', 'Bereik', 'Contact']
+    servicesPhotoAlt: 'Professionele medewerker die een tablet gebruikt in een zakelijke werkomgeving',
+    heroPhotoAlt: 'Ondernemer werkt geconcentreerd met een laptop in een professionele bedrijfsomgeving',
+    homePhotoAlt: 'Twee professionals bespreken bedrijfsactiviteiten met een laptop in een zakelijke horecaruimte',
+    aboutPhotoAlt: 'Hospitaliteitsprofessional bereidt een klantgerichte bedrijfsruimte voor',
+    mockupKicker: 'Digitale aanwezigheid', mockupTitle: 'Helderheid die bedrijven vooruithelpt.', mockupStats: ['SNEL / 98', 'LOKAAL / CV', 'KLAAR / 24'], browserPath: 'morabezatech.com / digitaal', systemBrowserKicker: 'LOKAAL / DIGITAAL', systemBrowserTitle: 'Vind. Vertrouw. Verbind.', systemBrowserFooter: ['Helderheid', 'Bereik', 'Contact']
   },
   pt: {
     systemEyebrow: 'Uma base digital',
@@ -61,14 +52,11 @@ const visualCopy: Record<Locale, VisualCopy> = {
       { label: 'Avaliações', detail: 'Reforçar a confiança' },
       { label: 'SEO', detail: 'Visibilidade consistente' }
     ],
-    servicesPhotoAlt: 'Rua colorida em Sal, Cabo Verde, com arquitetura local e um mural',
-    heroPhotoAlt: 'Porto do Mindelo em São Vicente, Cabo Verde, com barcos, cais e luz atlântica',
-    aboutPhotoAlt: 'Vista aérea da Praia, Cabo Verde, com telhados urbanos e a costa atlântica',
-    contactPhotoAlt: 'Rua e arquitetura local em Sal, Cabo Verde',
-    photoServicesLabel: 'Sal / contexto local',
-    photoAboutLabel: 'Praia / Cabo Verde',
-    photoContactLabel: 'Cabo Verde / próximo'
-    , heroTag: 'Mindelo / Cabo Verde', heroCaption: 'Porto / luz atlântica', heroLocation: 'São Vicente, Cabo Verde', mockupKicker: 'Presença digital', mockupTitle: 'Clareza que faz o negócio avançar.', mockupStats: ['RÁPIDO / 98', 'LOCAL / CV', 'PRONTO / 24'], browserPath: 'morabezatech.com / digital', systemBrowserKicker: 'LOCAL / DIGITAL', systemBrowserTitle: 'Encontre. Confie. Contacte.', systemBrowserFooter: ['Clareza', 'Alcance', 'Contacto']
+    servicesPhotoAlt: 'Profissional a utilizar um tablet num ambiente empresarial',
+    heroPhotoAlt: 'Empresário a trabalhar concentrado num portátil num ambiente profissional',
+    homePhotoAlt: 'Dois profissionais a discutir operações empresariais com um portátil num espaço de restauração',
+    aboutPhotoAlt: 'Profissional de hospitalidade a preparar um espaço de atendimento ao cliente',
+    mockupKicker: 'Presença digital', mockupTitle: 'Clareza que faz o negócio avançar.', mockupStats: ['RÁPIDO / 98', 'LOCAL / CV', 'PRONTO / 24'], browserPath: 'morabezatech.com / digital', systemBrowserKicker: 'LOCAL / DIGITAL', systemBrowserTitle: 'Encontre. Confie. Contacte.', systemBrowserFooter: ['Clareza', 'Alcance', 'Contacto']
   },
   en: {
     systemEyebrow: 'One digital foundation',
@@ -83,14 +71,11 @@ const visualCopy: Record<Locale, VisualCopy> = {
       { label: 'Reviews', detail: 'Build confidence' },
       { label: 'SEO', detail: 'Stay discoverable' }
     ],
-    servicesPhotoAlt: 'Colourful street in Sal, Cabo Verde, with local architecture and a mural',
-    heroPhotoAlt: 'Mindelo harbour in São Vicente, Cabo Verde, with ships, seawall and Atlantic morning light',
-    aboutPhotoAlt: 'Aerial view of Praia, Cabo Verde, with urban rooftops and the Atlantic coast',
-    contactPhotoAlt: 'Local street and architecture in Sal, Cabo Verde',
-    photoServicesLabel: 'Sal / local context',
-    photoAboutLabel: 'Praia / Cabo Verde',
-    photoContactLabel: 'Cabo Verde / close by'
-    , heroTag: 'Mindelo / Cabo Verde', heroCaption: 'Harbour / Atlantic light', heroLocation: 'São Vicente, Cabo Verde', mockupKicker: 'Digital presence', mockupTitle: 'Clarity that moves business forward.', mockupStats: ['FAST / 98', 'LOCAL / CV', 'READY / 24'], browserPath: 'morabezatech.com / digital', systemBrowserKicker: 'LOCAL / DIGITAL', systemBrowserTitle: 'Find. Trust. Connect.', systemBrowserFooter: ['Clarity', 'Reach', 'Contact']
+    servicesPhotoAlt: 'Professional using a tablet in a business environment',
+    heroPhotoAlt: 'Entrepreneur working on a laptop in a professional business environment',
+    homePhotoAlt: 'Two professionals discussing business operations around a laptop in a restaurant setting',
+    aboutPhotoAlt: 'Hospitality professional preparing a customer-facing business space',
+    mockupKicker: 'Digital presence', mockupTitle: 'Clarity that moves business forward.', mockupStats: ['FAST / 98', 'LOCAL / CV', 'READY / 24'], browserPath: 'morabezatech.com / digital', systemBrowserKicker: 'LOCAL / DIGITAL', systemBrowserTitle: 'Find. Trust. Connect.', systemBrowserFooter: ['Clarity', 'Reach', 'Contact']
   }
 };
 

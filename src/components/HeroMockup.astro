@@ -1,42 +1,42 @@
 ---
-interface Props { label: string; analysisLabel: string; value: string; imageAlt: string; }
-const { label, analysisLabel, value, imageAlt } = Astro.props;
+import type { Locale } from '../i18n/routes';
+import { getVisualCopy } from '../i18n/visual';
+
+interface Props { locale: Locale; label: string; analysisLabel: string; value: string; imageAlt: string; }
+const { locale, label, analysisLabel, value, imageAlt } = Astro.props;
+const visual = getVisualCopy(locale);
 ---
-<div class="mockup-stage" aria-label={label} data-reveal data-tilt>
-  <div class="hero-photo" aria-hidden="true">
-    <picture><source srcset="/assets/praia-hero.webp" type="image/webp" /><img src="/assets/praia-hero.png" alt={imageAlt} width="1024" height="1536" fetchpriority="high" /></picture>
+<div class="hero-visual" aria-label={label} data-reveal data-tilt>
+  <div class="hero-photo-frame">
+    <picture>
+      <source media="(max-width: 700px)" srcset="/assets/praia-city-800.webp" type="image/webp" />
+      <source srcset="/assets/praia-city-1400.webp 1400w, /assets/praia-city.webp 2400w" sizes="(max-width: 1100px) 60vw, 44vw" type="image/webp" />
+      <img src="/assets/praia-city.jpg" srcset="/assets/praia-city-800.webp 800w, /assets/praia-city-1400.webp 1400w, /assets/praia-city.webp 2400w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 60vw, 44vw" alt={imageAlt} width="2400" height="3200" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="hero-photo-shade"></div>
+    <span class="hero-photo-tag">{visual.heroTag}</span>
+    <span class="hero-photo-caption">{visual.heroCaption}</span>
   </div>
-  <span class="hero-photo-tag">Praia · Cabo Verde</span>
-  <div class="mockup-grid" aria-hidden="true"></div>
-  <div class="mockup-orbit" aria-hidden="true"></div>
-  <div class="browser">
-    <div class="browser-bar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i><span class="browser-url"></span></div>
-    <div class="ui-screen">
-      <div class="ui-top"><span class="ui-brand"></span><span class="ui-nav"><i></i><i></i><i></i></span></div>
-      <div class="ui-hero"><div><span class="ui-kicker"></span><div class="ui-title"></div><div class="ui-copy"></div><div class="ui-button"></div></div><div class="ui-art"></div></div>
-      <div class="ui-stat"><div><b></b><span></span></div><div><b></b><span></span></div><div><b></b><span></span></div></div>
-    </div>
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+  <div class="browser browser--hero">
+    <div class="browser-bar"><i></i><i></i><i></i><span>{visual.browserPath}</span></div>
+    <div class="ui-screen"><div class="ui-top"><b>MT</b><span><i></i><i></i><i></i></span></div><div class="ui-hero"><div><small>{visual.mockupKicker}</small><strong>{visual.mockupTitle}</strong><em></em></div><div class="ui-art"><span></span></div></div><div class="ui-stat">{visual.mockupStats.map((stat) => <span>{stat}</span>)}</div></div>
   </div>
-  <div class="device-card" aria-hidden="true">
-    <div class="device-speaker"></div>
-    <div class="device-screen"><span></span><b></b><i></i><em></em></div>
-  </div>
-  <div class="floating-card"><small>{analysisLabel}</small><strong>{value}</strong><div class="floating-line"></div></div>
-  <div class="mockup-location"><span></span>Built for the islands</div>
+  <div class="device-card" aria-hidden="true"><span>MT</span><b></b><i></i><em></em></div>
+  <div class="hero-status"><span></span><div><small>{analysisLabel}</small><strong>{value}</strong></div></div>
+  <div class="hero-location"><span></span>{visual.heroLocation}</div>
 </div>
+
 <script>
-  const tiltStage = document.querySelector<HTMLElement>('[data-tilt]');
-  if (tiltStage && !window.matchMedia('(pointer: coarse)').matches) {
-    tiltStage.addEventListener('pointermove', (event) => {
-      const bounds = tiltStage.getBoundingClientRect();
-      const x = ((event.clientX - bounds.left) / bounds.width - .5) * 7;
-      const y = ((event.clientY - bounds.top) / bounds.height - .5) * -6;
-      tiltStage.style.setProperty('--tilt-x', `${x}deg`);
-      tiltStage.style.setProperty('--tilt-y', `${y}deg`);
-    });
-    tiltStage.addEventListener('pointerleave', () => {
-      tiltStage.style.setProperty('--tilt-x', '0deg');
-      tiltStage.style.setProperty('--tilt-y', '0deg');
-    });
-  }
+  const visual = document.querySelector<HTMLElement>('[data-tilt]');
+  const browser = visual?.querySelector<HTMLElement>('.browser');
+  visual?.addEventListener('pointermove', (event) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !browser) return;
+    const bounds = visual.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - .5) * 6;
+    const y = ((event.clientY - bounds.top) / bounds.height - .5) * -5;
+    browser.style.setProperty('--tilt-x', `${x}deg`);
+    browser.style.setProperty('--tilt-y', `${y}deg`);
+  });
+  visual?.addEventListener('pointerleave', () => { browser?.style.removeProperty('--tilt-x'); browser?.style.removeProperty('--tilt-y'); });
 </script>

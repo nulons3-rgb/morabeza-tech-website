@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand-lockup" href={localizedPath(locale, 'home')} aria-label={`${company.name} — ${copy.nav.home}`}><img src="/assets/logo-extracted-000.png" alt="Morabeza Tech CV" width="1254" height="1254" /></a>
+        <a class="brand-lockup" href={localizedPath(locale, 'home')} aria-label={`${company.name} — ${copy.nav.home}`}><img src="/assets/logo-extracted-000.png" alt={company.name} width="1254" height="1254" /></a>
         <p>{copy.tagline}</p>
       </div>
       <div><h2 class="footer-title">{copy.footer.navigation}</h2><nav class="footer-links" aria-label={copy.footer.navigation}>{navPages.map((item) => <a href={localizedPath(locale, item)}>{copy.nav[item]}</a>)}</nav></div>

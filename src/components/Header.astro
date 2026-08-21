@@ -7,10 +7,11 @@ interface Props { locale: Locale; page: PageKey; copy: Translation; }
 const { locale, page, copy } = Astro.props;
 const current = Astro.url.pathname;
 const navPages: Array<Exclude<PageKey, 'privacy' | 'cookies'>> = ['home', 'services', 'packages', 'about', 'contact'];
+const isPaper = ['packages', 'contact', 'privacy', 'cookies'].includes(page);
 ---
-<header class="site-header">
+<header class:list={['site-header', isPaper && 'site-header--paper']}>
   <div class="container nav-shell">
-    <a class="brand-lockup" href={localizedPath(locale, 'home')} aria-label={`${company.name} — ${copy.nav.home}`}><img src="/assets/logo-extracted-000.png" alt="Morabeza Tech CV — Soluções digitais para o seu negócio." width="1254" height="1254" /></a>
+    <a class="brand-lockup" href={localizedPath(locale, 'home')} aria-label={`${company.name} — ${copy.nav.home}`}><img src="/assets/logo-extracted-000.png" alt={company.name} width="1254" height="1254" /></a>
     <nav class="desktop-nav" aria-label={copy.footer.navigation}>
       {navPages.map((item) => <a href={localizedPath(locale, item)} aria-current={current === localizedPath(locale, item) ? 'page' : undefined}>{copy.nav[item]}</a>)}
       <a class="btn btn--primary header-cta" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta}</a>

@@ -1,0 +1,46 @@
+---
+import type { Locale } from '../i18n/routes';
+import { getVisualCopy } from '../i18n/visual';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const visual = getVisualCopy(locale);
+---
+<section class="section section--system" id="digital-system">
+  <div class="container system-layout">
+    <div class="system-copy" data-reveal>
+      <SectionHeading light eyebrow={visual.systemEyebrow} title={visual.systemTitle} intro={visual.systemIntro} />
+      <p class="system-note"><span aria-hidden="true">↗</span>{visual.systemNote}</p>
+    </div>
+    <div class="system-visual" data-reveal data-system>
+      <div class="system-orbit system-orbit--one" aria-hidden="true"></div>
+      <div class="system-orbit system-orbit--two" aria-hidden="true"></div>
+      <div class="system-browser" aria-label={visual.systemTitle}>
+        <div class="system-browser-bar"><span></span><span></span><span></span><b>{visual.browserPath}</b></div>
+        <div class="system-browser-body">
+          <div class="system-browser-header"><i></i><em></em><strong></strong></div>
+          <div class="system-browser-hero"><div><small>{visual.systemBrowserKicker}</small><b>{visual.systemBrowserTitle}</b><span></span></div><div class="system-map" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+          <div class="system-browser-footer">{visual.systemBrowserFooter.map((item) => <span>{item}</span>)}</div>
+        </div>
+      </div>
+      <div class="system-nodes">
+        {visual.systemItems.map((item, index) => <button class:list={['system-node', index === 0 && 'is-active']} type="button" data-system-node={index} aria-pressed={index === 0 ? 'true' : 'false'}><span class="system-node-index">0{index + 1}</span><strong>{item.label}</strong><small>{item.detail}</small></button>)}
+      </div>
+      <div class="system-mobile" aria-hidden="true"><span></span><b></b><i></i></div>
+      <div class="system-legend"><span class="system-pulse"></span><span>{visual.systemNote}</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-system]').forEach((system) => {
+    const nodes = [...system.querySelectorAll<HTMLButtonElement>('[data-system-node]')];
+    const activate = (node: HTMLButtonElement) => {
+      nodes.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-pressed', 'false'); });
+      node.classList.add('is-active');
+      node.setAttribute('aria-pressed', 'true');
+    };
+    nodes.forEach((node) => { node.addEventListener('mouseenter', () => activate(node)); node.addEventListener('focus', () => activate(node)); });
+  });
+</script>

@@ -4,12 +4,15 @@ import HeroMockup from '../HeroMockup.astro';
 import ServiceCard from '../ServiceCard.astro';
 import PricingCards from '../PricingCards.astro';
 import CTASection from '../CTASection.astro';
+import DigitalSystem from '../DigitalSystem.astro';
 import { localizedPath, type Locale } from '../../i18n/routes';
+import { getVisualCopy } from '../../i18n/visual';
 import type { Translation } from '../../i18n/types';
 
 interface Props { copy: Translation; locale: Locale; }
 const { copy, locale } = Astro.props;
 const services = copy.servicesPage.services.slice(0, 4);
+const visual = getVisualCopy(locale);
 ---
 <section class="hero">
   <div class="container hero-grid">
@@ -17,14 +20,14 @@ const services = copy.servicesPage.services.slice(0, 4);
       <span class="eyebrow">{copy.home.eyebrow}</span>
       <h1 class="display">{copy.home.title}</h1>
       <p>{copy.home.intro}</p>
-      <div class="hero-actions"><a class="btn btn--primary" href={localizedPath(locale, 'services')}>{copy.common.viewServices} <span aria-hidden="true">↗</span></a><a class="btn btn--ghost" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta}</a></div>
+      <div class="hero-actions"><a class="btn btn--primary" href={localizedPath(locale, 'services')}>{copy.common.viewServices} <span aria-hidden="true">↗</span></a><a class="btn btn--outline-light" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta}</a></div>
       <div class="hero-note">{copy.home.supportingLine.map((item) => <span>{item}</span>)}</div>
     </div>
-    <HeroMockup label={copy.home.title} imageAlt={copy.home.title} analysisLabel={copy.home.mockupEyebrow} value={copy.home.mockupValue} />
+    <HeroMockup locale={locale} label={copy.home.title} imageAlt={visual.aboutPhotoAlt} analysisLabel={copy.home.mockupEyebrow} value={copy.home.mockupValue} />
   </div>
 </section>
 
-<section class="section">
+<section class="section section--editorial">
   <div class="container principles">
     <div data-reveal><SectionHeading eyebrow={copy.home.positioningEyebrow} title={copy.home.positioningTitle} intro={copy.home.positioningIntro} /></div>
     <div class="principles-list" data-reveal>{copy.home.principles.map((item) => <div class="principle"><span class="principle-number">{item.number}</span><div><h3>{item.title}</h3><p>{item.copy}</p></div></div>)}</div>
@@ -35,22 +38,17 @@ const services = copy.servicesPage.services.slice(0, 4);
   <div class="container"><div class="section-head"><SectionHeading eyebrow={copy.home.servicesEyebrow} title={copy.home.servicesTitle} intro={copy.home.servicesIntro} /><a class="text-link" href={localizedPath(locale, 'services')}>{copy.common.viewServices} <span aria-hidden="true">↗</span></a></div><div class="service-grid">{services.map((service) => <ServiceCard service={service} />)}</div></div>
 </section>
 
-<section class="section section--dark experience-section">
-  <div class="container experience-layout">
-    <div class="experience-photo" data-reveal><picture><source srcset="/assets/coastal-architecture.webp" type="image/webp" /><img src="/assets/coastal-architecture.png" alt={copy.home.servicesTitle} width="1536" height="1024" loading="lazy" /></picture><span>Local context / Digital craft</span></div>
-    <div data-reveal><SectionHeading light eyebrow={copy.home.servicesEyebrow} title={copy.home.servicesTitle} intro={copy.home.servicesIntro} /><div class="signal-list"><span>01 <b>Clarity</b></span><span>02 <b>Reach</b></span><span>03 <b>Contact</b></span></div><a class="btn btn--light" href={localizedPath(locale, 'services')}>{copy.common.viewServices} <span aria-hidden="true">↗</span></a></div>
-  </div>
-</section>
+<DigitalSystem locale={locale} />
 
-<section class="section">
-  <div class="container process-layout"><div data-reveal><SectionHeading eyebrow={copy.home.processEyebrow} title={copy.home.processTitle} intro={copy.home.processIntro} /></div><div class="timeline">{copy.home.process.map((item) => <div class="timeline-item" data-reveal><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.copy}</p></div></div>)}</div></div>
+<section class="section section--dark process-section">
+  <div class="container process-layout"><div data-reveal><SectionHeading light eyebrow={copy.home.processEyebrow} title={copy.home.processTitle} intro={copy.home.processIntro} /></div><div class="timeline">{copy.home.process.map((item) => <div class="timeline-item" data-reveal><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.copy}</p></div></div>)}</div></div>
 </section>
 
 <section class="section section--paper">
   <div class="container analysis"><div data-reveal><SectionHeading eyebrow={copy.home.analysisEyebrow} title={copy.home.analysisTitle} intro={copy.home.analysisIntro} /><a class="btn btn--primary" style="margin-top: 28px" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta} <span aria-hidden="true">↗</span></a></div><div class="analysis-panel" data-reveal><div class="analysis-panel-head"><b>{copy.common.analysisCta}</b><span class="analysis-status">{copy.home.analysisStatus}</span></div><div class="analysis-list">{copy.home.analysisItems.map((item) => <div class="analysis-item">{item}</div>)}</div><p class="analysis-note">{copy.home.analysisNote}</p></div></div>
 </section>
 
-<section class="section" id="pakketten"><div class="container"><div class="section-head"><SectionHeading eyebrow={copy.home.packagesEyebrow} title={copy.home.packagesTitle} intro={copy.home.packagesIntro} /><a class="text-link" href={localizedPath(locale, 'packages')}>{copy.common.viewPackages} <span aria-hidden="true">↗</span></a></div><PricingCards packages={copy.packagesPage.packages} from={copy.packagesPage.from} currency="CVE" featuredLabel={copy.common.mostChosen} /><p class="section-intro" style="margin: 27px auto 0; text-align: center; font-size: .9rem">{copy.home.monthlySupport}</p></div></section>
+<section class="section" id="pakketten"><div class="container"><div class="section-head"><SectionHeading eyebrow={copy.home.packagesEyebrow} title={copy.home.packagesTitle} intro={copy.home.packagesIntro} /><a class="text-link" href={localizedPath(locale, 'packages')}>{copy.common.viewPackages} <span aria-hidden="true">↗</span></a></div><PricingCards packages={copy.packagesPage.packages} from={copy.packagesPage.from} currency="CVE" featuredLabel={copy.common.mostChosen} /><p class="section-intro support-note">{copy.home.monthlySupport}</p></div></section>
 
-<section class="section section--paper"><div class="container about-split"><div class="about-mark" data-reveal><strong>{copy.home.aboutMark}</strong><span>{copy.home.aboutLocation}</span><div class="about-mark-orbit" aria-hidden="true"></div></div><div class="about-photo" data-reveal><picture><source srcset="/assets/local-business.webp" type="image/webp" /><img src="/assets/local-business.png" alt={copy.home.aboutTitle} width="1024" height="1536" loading="lazy" /></picture></div><div class="about-copy" data-reveal><SectionHeading eyebrow={copy.home.aboutEyebrow} title={copy.home.aboutTitle} intro={copy.home.aboutIntro} /><a class="text-link" style="margin-top: 26px" href={localizedPath(locale, 'about')}>{copy.common.learnMore} <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="section section--paper about-home"><div class="container about-split"><div class="about-mark" data-reveal><strong>{copy.home.aboutMark}</strong><span>{copy.home.aboutLocation}</span><div class="about-mark-orbit" aria-hidden="true"></div></div><div class="about-photo" data-reveal><picture><source srcset="/assets/praia-city-800.webp 800w, /assets/praia-city-1400.webp 1400w" sizes="(max-width: 767px) 92vw, 28vw" type="image/webp" /><img src="/assets/praia-city.jpg" alt={visual.aboutPhotoAlt} width="2400" height="3200" loading="lazy" /></picture><span class="photo-label">{visual.photoAboutLabel}</span></div><div class="about-copy" data-reveal><SectionHeading eyebrow={copy.home.aboutEyebrow} title={copy.home.aboutTitle} intro={copy.home.aboutIntro} /><a class="text-link" style="margin-top: 26px" href={localizedPath(locale, 'about')}>{copy.common.learnMore} <span aria-hidden="true">↗</span></a></div></div></section>
 <CTASection copy={copy} locale={locale} />

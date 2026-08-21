@@ -8,8 +8,6 @@
 /nl/pakketten/ /nl/pakketten/index.html 200
 /nl/over-ons /nl/over-ons/index.html 200
 /nl/over-ons/ /nl/over-ons/index.html 200
-/nl/portfolio /nl/ 301
-/nl/portfolio/ /nl/ 301
 /nl/contact /nl/contact/index.html 200
 /nl/contact/ /nl/contact/index.html 200
 /nl/privacybeleid /nl/privacybeleid/index.html 200
@@ -25,8 +23,6 @@
 /pt/pacotes/ /pt/pacotes/index.html 200
 /pt/sobre-nos /pt/sobre-nos/index.html 200
 /pt/sobre-nos/ /pt/sobre-nos/index.html 200
-/pt/portfolio /pt/ 301
-/pt/portfolio/ /pt/ 301
 /pt/contacto /pt/contacto/index.html 200
 /pt/contacto/ /pt/contacto/index.html 200
 /pt/politica-de-privacidade /pt/politica-de-privacidade/index.html 200
@@ -42,8 +38,6 @@
 /en/packages/ /en/packages/index.html 200
 /en/about /en/about/index.html 200
 /en/about/ /en/about/index.html 200
-/en/portfolio /en/ 301
-/en/portfolio/ /en/ 301
 /en/contact /en/contact/index.html 200
 /en/contact/ /en/contact/index.html 200
 /en/privacy /en/privacy/index.html 200

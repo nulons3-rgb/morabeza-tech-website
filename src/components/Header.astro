@@ -1,0 +1,26 @@
+---
+import { company } from '../data/site';
+import { localizedPath, type Locale, type PageKey } from '../i18n/routes';
+import type { Translation } from '../i18n/types';
+
+interface Props { locale: Locale; page: PageKey; copy: Translation; }
+const { locale, page, copy } = Astro.props;
+const current = Astro.url.pathname;
+const navPages: Array<Exclude<PageKey, 'privacy' | 'cookies'>> = ['home', 'services', 'packages', 'about', 'contact'];
+---
+<header class="site-header">
+  <div class="container nav-shell">
+    <a class="brand-lockup" href={localizedPath(locale, 'home')} aria-label={`${company.name} — ${copy.nav.home}`}><img src="/assets/logo-extracted-000.png" alt="Morabeza Tech CV — Soluções digitais para o seu negócio." width="1254" height="1254" /></a>
+    <nav class="desktop-nav" aria-label={copy.footer.navigation}>
+      {navPages.map((item) => <a href={localizedPath(locale, item)} aria-current={current === localizedPath(locale, item) ? 'page' : undefined}>{copy.nav[item]}</a>)}
+      <a class="btn btn--primary header-cta" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta}</a>
+      <div class="language-switcher" aria-label={copy.common.languageSelector}>{(['pt', 'en', 'nl'] as Locale[]).map((language) => <a class:list={[language === locale && 'is-active']} href={localizedPath(language, page)} lang={language} aria-current={language === locale ? 'true' : undefined}>{language.toUpperCase()}</a>)}</div>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label={copy.common.menuOpen} data-open-label={copy.common.menuOpen} data-close-label={copy.common.menuClose} aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+  <nav id="mobile-menu" class="mobile-menu" aria-label={copy.footer.navigation}>
+    {navPages.map((item) => <a href={localizedPath(locale, item)} aria-current={current === localizedPath(locale, item) ? 'page' : undefined}>{copy.nav[item]}</a>)}
+    <a class="btn btn--primary" href={`${localizedPath(locale, 'contact')}?onderwerp=${encodeURIComponent(copy.common.analysisCta)}`}>{copy.common.analysisCta} <span aria-hidden="true">↗</span></a>
+    <div class="mobile-language-switcher" aria-label={copy.common.languageSelector}>{(['pt', 'en', 'nl'] as Locale[]).map((language) => <a class:list={[language === locale && 'is-active']} href={localizedPath(language, page)} lang={language} aria-current={language === locale ? 'true' : undefined}>{language.toUpperCase()}</a>)}</div>
+  </nav>
+</header>

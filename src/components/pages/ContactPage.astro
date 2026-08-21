@@ -1,0 +1,11 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import ContactForm from '../ContactForm.astro';
+import type { Translation } from '../../i18n/types';
+import type { Locale } from '../../i18n/routes';
+import { company } from '../../data/site';
+interface Props { copy: Translation; locale: Locale; }
+const { copy } = Astro.props;
+---
+<section class="page-hero page-hero--paper"><div class="container"><span class="eyebrow">{copy.contactPage.eyebrow}</span><h1 class="display">{copy.contactPage.title}</h1><p class="section-intro">{copy.contactPage.intro}</p></div></section>
+<section class="section"><div class="container contact-grid"><div><SectionHeading eyebrow={copy.contactPage.sectionEyebrow} title={copy.contactPage.sectionTitle} intro={copy.contactPage.sectionIntro} /><div class="contact-details"><div class="contact-detail"><small>{copy.contactPage.form.email}</small><a href={`mailto:${company.email}`}>{company.email}</a></div><div class="contact-detail"><small>{copy.common.location}</small><strong>{company.location}</strong></div><div class="contact-detail"><small>{copy.contactPage.analysisLabel}</small><strong>{copy.contactPage.freeLabel}</strong></div></div></div><ContactForm copy={copy} /></div></section>

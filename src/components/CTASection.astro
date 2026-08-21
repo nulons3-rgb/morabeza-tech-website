@@ -1,0 +1,16 @@
+---
+import { company } from '../data/site';
+import type { Translation } from '../i18n/types';
+import type { Locale } from '../i18n/routes';
+import { localizedPath } from '../i18n/routes';
+interface Props { copy: Translation; locale: Locale; }
+const { copy, locale } = Astro.props;
+---
+<section class="section section--dark final-cta">
+  <div class="container" data-reveal>
+    <span class="eyebrow eyebrow--light">{copy.home.finalEyebrow}</span>
+    <h2 class="section-title">{copy.home.finalTitle}</h2>
+    <p class="section-intro dark-copy">{copy.home.finalIntro}</p>
+    <div class="final-actions"><a class="btn btn--light" href={localizedPath(locale, 'contact')}>{copy.common.startProject} <span aria-hidden="true">↗</span></a><a class="btn btn--ghost" href={`mailto:${company.email}`} style="color: white; border-color: rgba(255,255,255,.32)">{company.email}</a></div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomePage from '../../components/pages/HomePage.astro';
+import { getSeo, getTranslation } from '../../i18n/utils';
+import { locales, type Locale } from '../../i18n/routes';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { lang: locale }, props: { locale, copy: getTranslation(locale) } }));
+}
+
+const { locale, copy } = Astro.props as { locale: Locale; copy: ReturnType<typeof getTranslation> };
+const seo = getSeo(copy, 'home');
+---
+<BaseLayout locale={locale} page="home" title={seo.title} description={seo.description}>
+  <HomePage copy={copy} locale={locale} />
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { company } from '../data/site';
+import { getTranslation } from '../i18n/utils';
+import { localizedPath, type Locale, type PageKey } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  title: string;
+  description: string;
+  image?: string;
+}
+const { locale, page, title, description, image = '/assets/praia-hero.webp' } = Astro.props;
+const copy = getTranslation(locale);
+const canonical = new URL(localizedPath(locale, page), company.domain).toString();
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {page === 'home' && <link rel="preload" as="image" href="/assets/praia-hero.webp" type="image/webp" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={company.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, company.domain).toString()} />
+    {(['pt', 'en', 'nl'] as Locale[]).map((language) => <link rel="alternate" hreflang={language} href={new URL(localizedPath(language, page), company.domain).toString()} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL('/pt/', company.domain).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, company.domain).toString()} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header locale={locale} page={page} copy={copy} />
+    <main><slot /></main>
+    <Footer locale={locale} copy={copy} />
+    <script is:inline>
+      const header = document.querySelector('.site-header');
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.mobile-menu');
+      const setMenu = (open) => {
+        menu?.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
+        toggle?.setAttribute('aria-expanded', String(open));
+        toggle?.setAttribute('aria-label', open ? toggle?.dataset.closeLabel || '' : toggle?.dataset.openLabel || '');
+      };
+      toggle?.addEventListener('click', () => setMenu(!menu?.classList.contains('is-open')));
+      menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+      window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 12), { passive: true });
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: .12 });
+      document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+    </script>
+  </body>
+</html>

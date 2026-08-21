@@ -2,9 +2,11 @@
 import { company } from '../data/site';
 import { localizedPath, type Locale, type PageKey } from '../i18n/routes';
 import type { Translation } from '../i18n/types';
+import { getServiceCategories } from '../data/serviceCategories';
 interface Props { locale: Locale; copy: Translation; }
 const { locale, copy } = Astro.props;
 const navPages: Array<Exclude<PageKey, 'privacy' | 'cookies'>> = ['home', 'services', 'packages', 'about', 'contact'];
+const serviceCategories = getServiceCategories(locale);
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -15,7 +17,7 @@ const year = new Date().getFullYear();
         <p>{copy.tagline}</p>
       </div>
       <div><h2 class="footer-title">{copy.footer.navigation}</h2><nav class="footer-links" aria-label={copy.footer.navigation}>{navPages.map((item) => <a href={localizedPath(locale, item)}>{copy.nav[item]}</a>)}</nav></div>
-      <div><h2 class="footer-title">{copy.footer.services}</h2><nav class="footer-links">{copy.footer.servicesList.map((item) => <a href={`${localizedPath(locale, 'services')}#${item.id}`}>{item.label}</a>)}</nav></div>
+      <div><h2 class="footer-title">{copy.footer.services}</h2><nav class="footer-links">{serviceCategories.map((item) => <a href={`${localizedPath(locale, 'services')}#service-${item.number}`}>{item.title}</a>)}</nav></div>
       <div><h2 class="footer-title">{copy.footer.contact}</h2><div class="footer-links"><span>{company.location}</span><a href={`mailto:${company.email}`}>{company.email}</a></div></div>
     </div>
     <div class="footer-bottom"><span>© {year} {company.name}. {copy.footer.rights}</span><span><a href={localizedPath(locale, 'privacy')}>{copy.footer.privacy}</a> · <a href={localizedPath(locale, 'cookies')}>{copy.footer.cookies}</a></span></div>

@@ -1,0 +1,22 @@
+---
+import type { Locale } from '../i18n/routes';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = {
+  nl: { eyebrow: 'Technologie & platformen', title: 'Eén digitale partner. Alle belangrijke platformen.', intro: 'Van Google en Microsoft tot Meta, WhatsApp, YouTube en cloudtechnologie: Morabeza Tech helpt bedrijven hun digitale kanalen, systemen en technologie samen te brengen in één professionele aanpak.', note: 'Wij kiezen technologie op basis van wat uw bedrijf nodig heeft.' },
+  pt: { eyebrow: 'Tecnologia & plataformas', title: 'Um parceiro digital. As plataformas que o seu negócio precisa.', intro: 'Do Google e Microsoft à Meta, WhatsApp, YouTube e tecnologia cloud: a Morabeza Tech ajuda empresas a reunir canais, sistemas e tecnologia numa abordagem profissional.', note: 'Escolhemos a tecnologia com base no que o seu negócio precisa.' },
+  en: { eyebrow: 'Technology & platforms', title: 'One digital partner. The platforms that matter.', intro: 'From Google and Microsoft to Meta, WhatsApp, YouTube and cloud technology, Morabeza Tech helps businesses bring digital channels, systems and technology together in one professional approach.', note: 'We choose technology around what your business needs.' }
+}[locale];
+const platforms = [
+  ['google', 'Google'], ['googlemaps', 'Google Maps'], ['youtube', 'YouTube'], ['facebook', 'Facebook'], ['instagram', 'Instagram'],
+  ['whatsapp', 'WhatsApp'], ['tiktok', 'TikTok'], ['linkedin', 'LinkedIn'], ['microsoft', 'Microsoft'], ['wordpress', 'WordPress'],
+  ['shopify', 'Shopify'], ['cloudflare', 'Cloudflare'], ['googleanalytics', 'Google Analytics'], ['googleads', 'Google Ads'], ['meta', 'Meta']
+];
+---
+<section class="section platform-section section--dark">
+  <div class="container platform-layout">
+    <div class="platform-copy" data-reveal><span class="eyebrow eyebrow--light">{copy.eyebrow}</span><h2 class="section-title section-title--light">{copy.title}</h2><p>{copy.intro}</p><p class="platform-note">{copy.note}</p></div>
+    <div class="platform-grid" aria-label={copy.eyebrow} data-reveal>{platforms.map(([slug, name]) => <div class="platform-item"><span class="platform-icon"><img src={`/assets/platforms/${slug}.svg`} alt="" width="24" height="24" loading="lazy" /></span><span>{name}</span></div>)}</div>
+  </div>
+</section>

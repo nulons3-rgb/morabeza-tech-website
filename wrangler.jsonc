@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "morabeza-tech-website",
+  "main": "src/worker.ts",
   "compatibility_date": "2026-08-20",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
     "html_handling": "none"
   }
 }

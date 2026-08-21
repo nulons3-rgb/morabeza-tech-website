@@ -13,7 +13,7 @@ interface Props {
   description: string;
   image?: string;
 }
-const { locale, page, title, description, image = '/assets/praia-city.webp' } = Astro.props;
+const { locale, page, title, description, image = '/assets/mindelo-harbor.webp' } = Astro.props;
 const copy = getTranslation(locale);
 const canonical = new URL(localizedPath(locale, page), company.domain).toString();
 ---
@@ -25,7 +25,7 @@ const canonical = new URL(localizedPath(locale, page), company.domain).toString(
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    {page === 'home' && <link rel="preload" as="image" href="/assets/praia-city-1400.webp" type="image/webp" />}
+    {page === 'home' && <link rel="preload" as="image" href="/assets/mindelo-harbor-1400.webp" type="image/webp" />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={company.name} />
     <meta property="og:title" content={title} />

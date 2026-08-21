@@ -11,7 +11,6 @@ export interface ServiceCopy {
 
 export interface PackageCopy {
   name: string;
-  price: string;
   description: string;
   fit: string;
   featured: boolean;
@@ -103,7 +102,9 @@ export interface Translation {
     sectionTitle: string;
     sectionIntro: string;
     packages: PackageCopy[];
-    from: string;
+    consultationTitle: string;
+    consultationIntro: string;
+    consultationCta: string;
     monthlySupport: string;
     faqEyebrow: string;
     faqTitle: string;

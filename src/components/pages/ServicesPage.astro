@@ -4,12 +4,14 @@ import CTASection from '../CTASection.astro';
 import type { Translation } from '../../i18n/types';
 import type { Locale } from '../../i18n/routes';
 import { getVisualCopy } from '../../i18n/visual';
+import { getServiceCategories } from '../../data/serviceCategories';
 
 interface Props { copy: Translation; locale: Locale; }
 const { copy, locale } = Astro.props;
 const visual = getVisualCopy(locale);
+const services = getServiceCategories(locale);
 ---
 <section class="page-hero"><div class="container"><span class="eyebrow eyebrow--light">{copy.servicesPage.eyebrow}</span><h1 class="display">{copy.servicesPage.title}</h1><p class="section-intro dark-copy">{copy.servicesPage.intro}</p></div></section>
 <section class="photo-break photo-break--services"><div class="container photo-break-layout"><picture><source srcset="/assets/sal-street-900.webp 900w, /assets/sal-street.webp 1800w" sizes="(max-width: 767px) 92vw, 55vw" type="image/webp" /><img src="/assets/sal-street.jpg" alt={visual.servicesPhotoAlt} width="1800" height="790" loading="eager" /></picture><div><span class="eyebrow">{visual.photoServicesLabel}</span><p>{visual.systemIntro}</p></div></div></section>
-<section class="section"><div class="container"><div class="section-head"><SectionHeading eyebrow={copy.servicesPage.sectionEyebrow} title={copy.servicesPage.sectionTitle} intro={copy.servicesPage.sectionIntro} /></div><div class="service-detail-grid">{copy.servicesPage.services.map((service) => <article class="service-detail" id={service.number === '01' ? 'websites' : service.number === '02' ? 'google' : service.number === '03' ? 'whatsapp' : service.number === '04' ? 'social' : service.number === '05' ? 'reserveringen' : service.number === '07' ? 'seo' : service.number === '08' ? 'onderhoud' : undefined} data-reveal><span class="service-detail-number">{service.number} / 08</span><div><h2>{service.title}</h2><ul>{service.items.map((item) => <li>{item}</li>)}</ul></div><p>{service.detail}</p></article>)}</div></div></section>
+<section class="section"><div class="container"><div class="section-head"><SectionHeading eyebrow={copy.servicesPage.sectionEyebrow} title={copy.servicesPage.sectionTitle} intro={copy.servicesPage.sectionIntro} /></div><div class="service-detail-grid">{services.map((service) => <article class="service-detail" id={`service-${service.number}`} data-reveal><span class="service-detail-number">{service.number} / 08</span><div><h2>{service.title}</h2><ul>{service.items.map((item) => <li>{item}</li>)}</ul></div><p>{service.detail}</p></article>)}</div></div></section>
 <CTASection copy={copy} locale={locale} />

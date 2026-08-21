@@ -1,14 +1,16 @@
 ---
 import type { PackageCopy } from '../i18n/types';
-interface Props { packages: PackageCopy[]; from: string; currency: string; featuredLabel: string; }
-const { packages, from, currency, featuredLabel } = Astro.props;
+import { localizedPath, type Locale } from '../i18n/routes';
+interface Props { packages: PackageCopy[]; featuredLabel: string; consultationTitle: string; consultationIntro: string; consultationCta: string; locale: Locale; }
+const { packages, featuredLabel, consultationTitle, consultationIntro, consultationCta, locale } = Astro.props;
 ---
 <div class="pricing-grid">
   {packages.map((item) => <article class:list={['price-card', item.featured && 'price-card--featured']} data-reveal>
     {item.featured && <span class="price-ribbon">{featuredLabel}</span>}
     <h3>{item.name}</h3>
-    <div class="price"><small>{from}</small> {item.price} <small>{currency}</small></div>
+    <div class="package-rule" aria-hidden="true"></div>
     <p>{item.description}</p>
     <div class="fit">{item.fit}</div>
   </article>)}
 </div>
+<div class="package-consultation" data-reveal><div><span class="eyebrow">{consultationTitle}</span><p>{consultationIntro}</p></div><a class="btn btn--primary" href={localizedPath(locale, 'contact')}>{consultationCta} <span aria-hidden="true">↗</span></a></div>

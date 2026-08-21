@@ -9,9 +9,11 @@ const visual = getVisualCopy(locale);
 <div class="hero-visual" aria-label={label} data-reveal data-tilt>
   <div class="hero-photo-frame">
     <picture>
-      <source media="(max-width: 700px)" srcset="/assets/praia-city-800.webp" type="image/webp" />
-      <source srcset="/assets/praia-city-1400.webp 1400w, /assets/praia-city.webp 2400w" sizes="(max-width: 1100px) 60vw, 44vw" type="image/webp" />
-      <img src="/assets/praia-city.jpg" srcset="/assets/praia-city-800.webp 800w, /assets/praia-city-1400.webp 1400w, /assets/praia-city.webp 2400w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 60vw, 44vw" alt={imageAlt} width="2400" height="3200" fetchpriority="high" decoding="async" />
+      <source media="(max-width: 700px)" srcset="/assets/mindelo-harbor.avif" type="image/avif" />
+      <source media="(max-width: 700px)" srcset="/assets/mindelo-harbor-800.webp" type="image/webp" />
+      <source srcset="/assets/mindelo-harbor.avif" type="image/avif" />
+      <source srcset="/assets/mindelo-harbor-800.webp 800w, /assets/mindelo-harbor-1400.webp 1400w, /assets/mindelo-harbor.webp 2400w" sizes="(max-width: 1100px) 60vw, 44vw" type="image/webp" />
+      <img src="/assets/mindelo-harbor.jpg" srcset="/assets/mindelo-harbor-800.webp 800w, /assets/mindelo-harbor-1400.webp 1400w, /assets/mindelo-harbor.webp 2400w" sizes="(max-width: 700px) 92vw, (max-width: 1100px) 60vw, 44vw" alt={imageAlt} width="2400" height="1384" fetchpriority="high" decoding="async" />
     </picture>
     <div class="hero-photo-shade"></div>
     <span class="hero-photo-tag">{visual.heroTag}</span>
